@@ -4,8 +4,61 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+    state: {
+        completed: true,
+        ttodos:JSON.parse(localStorage.getItem('receips-list')),
+        todos: [],
+        user:[],
+    },
+    getters: {
+        allTTodos: (state) => state.ttodos,
+        allTodos: (state) => state.todos,
+        completed: (state) => state.completed,
+    },
+    actions: {
+        changeCompleted({ commit }) {
+            commit("change_complete");
+        },
+        addTodo({ commit }, todo) {
+            commit("add_todo", todo);
+        },
+        addUser({ commit }, user) {
+            commit("add_user", user);
+        },
+        deleteTodo({ commit }, id) {
+            commit("delete_todo", id);
+        },
+        updateTodo({ commit }, todo) {
+            commit("update_todo", todo);
+        },
+    },
+    mutations: {
+        add_todo(state, todo) {
+            state.todos.push(todo);
+            state.ttodos = state.todos;
+            localStorage.setItem('receips-list', JSON.stringify(state.todos))
+        },
+        add_user(state, todo) {
+            state.user.push(todo);
+            localStorage.setItem('userAccount', JSON.stringify(state.user))
+        },
+        delete_todo(state, id) {
+            state.todos = state.todos.filter((todo) => todo.id != id);
+            state.ttodos = state.todos;
+        },
+        update_todo(state, todo) {
+            let index = state.todos.findIndex((t) => t.id == todo.id);
+            if (index != -1) {
+                state.todos[index] = todo;
+            }
+        },
+        change_complete(state) {
+            state.ttodos = state.todos;
+            state.completed = state.completed == true ? false : true;
+            state.ttodos = state.ttodos.filter(
+                (t) => t.complete == state.completed
+            );
+        },
+    },
+    modules: {},
 });
