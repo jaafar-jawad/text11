@@ -9,8 +9,8 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav class="r">
                         <b-nav-item href="#">
-                            <router-link to="/" tag="li" exact>
-                                <a>Home</a>
+                            <router-link to="/" tag="li">
+                                <a>Login</a>
                             </router-link>
                         </b-nav-item>
                         <b-nav-item href="#">
@@ -18,11 +18,7 @@
                                 <a> NEW Recipes</a>
                             </router-link>
                         </b-nav-item>
-                        <b-nav-item href="#">
-                            <router-link to="/login" tag="li">
-                                <a>Login</a>
-                            </router-link>
-                        </b-nav-item>
+                        
                         <b-nav-item href="#">
                             <router-link to="/registration" tag="li">
                                 <a>Registration</a>
